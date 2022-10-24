@@ -5,3 +5,7 @@ export interface TranslateRequestBody {
   text: string
   sourceLanguageCode: LanguageCodes
 }
+
+export interface TranslateResponse {
+  translation: string;
+}

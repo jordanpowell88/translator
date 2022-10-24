@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'caribbean-developers-conference-translation',
@@ -7,5 +6,5 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./translation.component.scss'],
 })
 export class TranslationComponent {
-  translation$: Observable<string> = of();
+  @Input() translation: string | null = null;
 }

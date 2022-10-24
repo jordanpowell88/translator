@@ -7,6 +7,8 @@ import { NavComponent } from './nav/nav.component';
 import { InputComponent } from './input/input.component';
 import { ButtonComponent } from './button/button.component';
 import { TranslationComponent } from './translation/translation.component';
+import { StateModule } from '@caribbean-developers-conference/state';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -15,8 +17,9 @@ import { TranslationComponent } from './translation/translation.component';
     InputComponent,
     ButtonComponent,
     TranslationComponent,
+    ErrorComponent,
   ],
-  imports: [BrowserModule, HttpClientModule],
+  imports: [BrowserModule, HttpClientModule, StateModule],
   providers: [],
   bootstrap: [AppComponent],
 })

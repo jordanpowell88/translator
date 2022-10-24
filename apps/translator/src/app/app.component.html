@@ -9,13 +9,15 @@
   <main>
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
       <div class="px-4 py-6 sm:px-0">
-        <caribbean-developers-conference-input></caribbean-developers-conference-input>
+        <caribbean-developers-conference-input (changed)="textToTranslate = $event"></caribbean-developers-conference-input>
 
-        <caribbean-developers-conference-button position="end">
+        <caribbean-developers-conference-button position="end" (clicked)="translate()">
           Translate
         </caribbean-developers-conference-button>
         
-       <caribbean-developers-conference-translation></caribbean-developers-conference-translation>
+       <caribbean-developers-conference-translation *ngIf="loaded$ | async" [translation]="translation$ | async"></caribbean-developers-conference-translation>
+
+       <caribbean-developers-conference-error [error]="error$ | async"></caribbean-developers-conference-error>
       </div>
     </div>
   </main>

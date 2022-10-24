@@ -1,6 +1,6 @@
 
 <div>
     <label for="translation-text" class="sr-only">Translation Text...</label>
-    <input type="text" name="translation-text" id="translation-text" class="block w-full p-4 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Translation Text...">
+    <input (keyup)="onChange($event)" type="text" name="translation-text" id="translation-text" class="block w-full p-4 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Translation Text...">
 </div>
   
