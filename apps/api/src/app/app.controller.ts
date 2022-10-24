@@ -1,15 +1,17 @@
-import { Controller, Get } from '@nestjs/common';
+import { TranslateRequestBody } from '@caribbean-developers-conference/api-interfaces';
+import { Body, Controller, Post } from '@nestjs/common';
+import { TranslationService } from './translation/translation.service';
 
-import { Message } from '@caribbean-developers-conference/api-interfaces';
 
-import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly service: TranslationService) {}
 
-  @Get('hello')
-  getData(): Message {
-    return this.appService.getData();
+  @Post('translate')
+  async makeTranslation(@Body() body: TranslateRequestBody): Promise<string> {
+    const { text, sourceLanguageCode  } = body;
+    console.log({ requestBody: body })
+    return await this.service.translate(text, sourceLanguageCode);
   }
 }
