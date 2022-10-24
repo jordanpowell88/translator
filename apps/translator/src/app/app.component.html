@@ -1,9 +1,22 @@
-<div style="text-align: center">
-  <h1>Welcome to translator!</h1>
-  <img
-    width="450"
-    src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png"
-    alt="Nx - Smart, Fast and Extensible Build System"
-  />
+<div class="min-h-full">
+  <caribbean-developers-conference-nav></caribbean-developers-conference-nav>
+  
+  <header class="bg-white shadow">
+    <div class="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Translator</h1>
+    </div>
+  </header>
+  <main>
+    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+      <div class="px-4 py-6 sm:px-0">
+        <caribbean-developers-conference-input></caribbean-developers-conference-input>
+
+        <caribbean-developers-conference-button position="end">
+          Translate
+        </caribbean-developers-conference-button>
+        
+       <caribbean-developers-conference-translation></caribbean-developers-conference-translation>
+      </div>
+    </div>
+  </main>
 </div>
-<div>Message: {{ hello$ | async | json }}</div>
