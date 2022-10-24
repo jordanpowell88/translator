@@ -17,7 +17,8 @@
     "paths": {
       "@caribbean-developers-conference/api-interfaces": [
         "libs/api-interfaces/src/index.ts"
-      ]
+      ],
+      "@caribbean-developers-conference/state": ["libs/state/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
