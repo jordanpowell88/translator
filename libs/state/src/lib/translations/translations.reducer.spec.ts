@@ -1,7 +1,6 @@
 import { Action } from '@ngrx/store';
 
 import * as TranslationsActions from './translations.actions';
-import { TranslationsEntity } from './translations.models';
 import {
   TranslationsState,
   initialTranslationsState,
@@ -9,22 +8,12 @@ import {
 } from './translations.reducer';
 
 describe('Translations Reducer', () => {
-  const createTranslationsEntity = (
-    id: string,
-    name = ''
-  ): TranslationsEntity => ({
-    id,
-    name: name || `name-${id}`,
-  });
 
-  describe('valid Translations actions', () => {
-    it('loadTranslationsSuccess should return the list of known Translations', () => {
-      const translations = [
-        createTranslationsEntity('PRODUCT-AAA'),
-        createTranslationsEntity('PRODUCT-zzz'),
-      ];
-      const action = TranslationsActions.loadTranslationsSuccess({
-        translations,
+  describe('initialize a Translation request', () => {
+    it('loadTranslations should initialize', () => {
+      const translate = 'hello';
+      const action = TranslationsActions.loadTranslations({
+        translate,
       });
 
       const result: TranslationsState = translationsReducer(
@@ -32,8 +21,44 @@ describe('Translations Reducer', () => {
         action
       );
 
+      expect(result.translation).toBeNull();
+      expect(result.loaded).toBe(false);
+      expect(result.error).toBeNull()
+    });
+  });
+  describe('valid Translations actions', () => {
+    it('loadTranslationsSuccess should return the list of known Translations', () => {
+      const translation = 'Hola'
+      const action = TranslationsActions.loadTranslationsSuccess({
+        translation,
+      });
+
+      const result: TranslationsState = translationsReducer(
+        initialTranslationsState,
+        action
+      );
+
+      expect(result.translation).toEqual(translation);
       expect(result.loaded).toBe(true);
-      expect(result.ids.length).toBe(2);
+      expect(result.error).toBeNull();
+    });
+  });
+
+  describe('invalid Translations actions', () => {
+    it('loadTranslationsFailure should throw an error', () => {
+      const error = 'my test failure';
+      const action = TranslationsActions.loadTranslationsFailure({
+        error,
+      });
+
+      const result: TranslationsState = translationsReducer(
+        initialTranslationsState,
+        action
+      );
+
+      expect(result.translation).toEqual(initialTranslationsState.translation);
+      expect(result.loaded).toBe(false);
+      expect(result.error).toEqual(error);
     });
   });
 

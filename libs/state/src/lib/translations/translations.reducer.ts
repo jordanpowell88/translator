@@ -36,7 +36,7 @@ const reducer = createReducer<TranslationsState>(
   })),
   on(TranslationsActions.loadTranslationsFailure, (state, { error }) => ({
     ...state,
-    loaded: true,
+    loaded: false,
     error,
   }))
 );

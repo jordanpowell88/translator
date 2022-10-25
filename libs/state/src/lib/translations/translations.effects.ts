@@ -18,8 +18,7 @@ export class TranslationsEffects {
             map((translation) => TranslationsActions.loadTranslationsSuccess({ translation })))
         },
         onError: (action, error) => {
-          console.error('Error', error);
-          return TranslationsActions.loadTranslationsFailure({ error });
+          return TranslationsActions.loadTranslationsFailure({ error: 'Sorry, but there was a problem fetching an accurate translation' });
         },
       })
     )
