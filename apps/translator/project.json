@@ -7,7 +7,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/translator",
         "index": "apps/translator/src/index.html",
@@ -19,7 +21,9 @@
           "apps/translator/src/favicon.ico",
           "apps/translator/src/assets"
         ],
-        "styles": ["apps/translator/src/styles.scss"],
+        "styles": [
+          "apps/translator/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -87,10 +91,21 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/translator/jest.config.ts",
         "passWithNoTests": true
+      }
+    },
+    "component-test": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/translator/cypress.config.ts",
+        "testingType": "component",
+        "skipServe": true,
+        "devServerTarget": "translator:build"
       }
     }
   },
