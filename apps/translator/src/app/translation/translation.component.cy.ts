@@ -26,4 +26,14 @@ describe(TranslationComponent.name, () => {
     })
     cy.contains('Hola')
   })
+
+  it('validates the translation is readible', () => {
+    cy.mount(TranslationComponent, {
+      ...config,
+      componentProperties: {
+        translation: 'Hola'
+      }
+    })
+    cy.get('h3').contains('Hola').should('have.css', 'font-size', '24px')
+  })
 })
