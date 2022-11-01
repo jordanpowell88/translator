@@ -1,13 +1,20 @@
-import { getGreeting } from '../support/app.po';
-
 describe('translator', () => {
-  beforeEach(() => cy.visit('/'));
-
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
-
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome translator');
+  beforeEach(() => {
+    cy.visit('/')
+    cy.get('h1').contains('Translator')
   });
+
+  it('should get a translation', () => {
+    cy.intercept('**/api/translate', { statusCode: 200, body: { translation: 'holla' } })
+    cy.get('input').type('hello')
+    cy.get('button').contains('Translate').click()
+    cy.contains('holla')
+  });
+
+  it('should display an error message when fetching a translation fails', () => {
+    cy.intercept('**/api/translate', { statusCode: 500 });
+    cy.get('input').type('hello')
+    cy.get('button').contains('Translate').click()
+    cy.get('p').contains('Sorry, but there was a problem fetching an accurate translation')
+  })
 });
