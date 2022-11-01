@@ -14,15 +14,25 @@ export class TranslationsEffects {
       fetch({
         run: ({ translate }) => {
           return this.service.translate(translate).pipe(
-            map(({translation }) => translation),
-            map((translation) => TranslationsActions.loadTranslationsSuccess({ translation })))
+            map(({ translation }) => translation),
+            map((translation) =>
+              TranslationsActions.loadTranslationsSuccess({ translation })
+            )
+          );
         },
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         onError: (action, error) => {
-          return TranslationsActions.loadTranslationsFailure({ error: 'Sorry, but there was a problem fetching an accurate translation' });
+          return TranslationsActions.loadTranslationsFailure({
+            error:
+              'Sorry, but there was a problem fetching an accurate translation',
+          });
         },
       })
     )
   );
 
-  constructor(private readonly actions$: Actions, private readonly service: TranslationsService) {}
+  constructor(
+    private readonly actions$: Actions,
+    private readonly service: TranslationsService
+  ) {}
 }

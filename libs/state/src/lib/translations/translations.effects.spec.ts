@@ -4,7 +4,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 import { hot } from 'jasmine-marbles';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import * as TranslationsActions from './translations.actions';
 import { TranslationsEffects } from './translations.effects';
@@ -15,7 +15,9 @@ import { Injectable } from '@angular/core';
 @Injectable()
 class MockTranslationsService extends TranslationsService {
   override translate(text: string): Observable<TranslateResponse> {
-    return text === 'error' ? new Observable(subscriber => subscriber.error()) : of({ translation: text })
+    return text === 'error'
+      ? new Observable((subscriber) => subscriber.error())
+      : of({ translation: text });
   }
 }
 
@@ -42,19 +44,32 @@ describe('TranslationsEffects', () => {
 
   describe('loadTranslations$', () => {
     it('should work', () => {
-      actions = hot('-a-|', { a: TranslationsActions.loadTranslations({ translate: 'hello'}) });
+      actions = hot('-a-|', {
+        a: TranslationsActions.loadTranslations({ translate: 'hello' }),
+      });
 
-      const expected = hot('-a-|', { a: TranslationsActions.loadTranslationsSuccess({ translation: 'hello' }) });
+      const expected = hot('-a-|', {
+        a: TranslationsActions.loadTranslationsSuccess({
+          translation: 'hello',
+        }),
+      });
 
       expect(effects.loadTranslations$).toBeObservable(expected);
     });
 
     it('should throw an error', () => {
-      actions = hot('-a-|', { a: TranslationsActions.loadTranslations({ translate: 'error' }) });
+      actions = hot('-a-|', {
+        a: TranslationsActions.loadTranslations({ translate: 'error' }),
+      });
 
-      const expected = hot('-a-|', { a: TranslationsActions.loadTranslationsFailure({ error: 'Sorry, but there was a problem fetching an accurate translation' }) });
+      const expected = hot('-a-|', {
+        a: TranslationsActions.loadTranslationsFailure({
+          error:
+            'Sorry, but there was a problem fetching an accurate translation',
+        }),
+      });
 
-      expect(effects.loadTranslations$).toBeObservable(expected)
-    })
+      expect(effects.loadTranslations$).toBeObservable(expected);
+    });
   });
 });

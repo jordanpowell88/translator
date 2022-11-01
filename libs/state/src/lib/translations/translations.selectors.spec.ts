@@ -1,8 +1,4 @@
-import {
-  TranslationsPartialState,
-  initialTranslationsState,
-  TRANSLATIONS_FEATURE_KEY,
-} from './translations.reducer';
+import { TranslationsPartialState } from './translations.reducer';
 import * as TranslationsSelectors from './translations.selectors';
 
 describe('Translations Selectors', () => {
@@ -16,8 +12,8 @@ describe('Translations Selectors', () => {
       translations: {
         loaded: true,
         error: ERROR_MSG,
-        translation: TRANSLATION 
-      }
+        translation: TRANSLATION,
+      },
     };
   });
 
@@ -25,7 +21,7 @@ describe('Translations Selectors', () => {
     it('getTranslation() should return the Translation', () => {
       const result = TranslationsSelectors.getTranslation(state);
 
-      expect(result).toEqual(TRANSLATION)
+      expect(result).toEqual(TRANSLATION);
     });
 
     it('getTranslationsLoaded() should return the current "loaded" status', () => {

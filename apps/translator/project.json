@@ -92,6 +92,15 @@
         "jestConfig": "apps/translator/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "component-test": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/translator/cypress.config.ts",
+        "testingType": "component",
+        "devServerTarget": "translator:build",
+        "skipServe": true
+      }
     }
   },
   "tags": []
